@@ -18,6 +18,8 @@
     </bean>
 
     <!-- 通过构造方法来配置 bean 的属性 -->
+    <!-- 通过构造方法注入Bean 的属性值或依赖的对象，它保证了 Bean 实例在实例化后就可以使用 -->
+    <!-- 构造器注入在 <constructor-arg> 元素里声明属性-->
     <bean id="car" class="com.mmz.spring.beans.Car">
         <constructor-arg name="brand" value="Auto"></constructor-arg>
         <constructor-arg name="corp" value="Shanghai"></constructor-arg>
