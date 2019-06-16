@@ -26,10 +26,10 @@ public class Main {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         //2. 从 IOC 容器中获取 bean 的实例
-        HelloWorld helloWorld = (HelloWorld) ctx.getBean("helloWorld");
+        //HelloWorld helloWorld = (HelloWorld) ctx.getBean("helloWorld");
 
         //3. 使用 bean
-        helloWorld.hello();
+        //helloWorld.hello();
 
 
 
