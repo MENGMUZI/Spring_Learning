@@ -3,8 +3,32 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- 配置bean -->
+    <!-- 配置bean
+        class: bean 的 指的是HelloWorld的全路径名称，并且由于是通过反射方式创建Bean,因此Bean中必须有无参的构造器.
+        id:当创建好一个bean之后，如何引用这个bean呢？就需要使用id.它标识bean.并且id唯一.
+    -->
+
+    <!-- Spring的依赖注入
+        Spring有3种注入方式，属性注入即通过 setter 方法注入Bean 的属性值或依赖的对象
+        属性注入使用 <property> 元素, 使用 name 属性指定 Bean 的属性名称，value 属性或 <value> 子节点指定属性值
+        属性注入是实际应用中最常用的注入方式
+    -->
     <bean id="helloWorld" class="com.mmz.spring.beans.HelloWorld">
         <property name="name" value="spring"> </property>
     </bean>
+
+    <!-- 通过构造方法来配置 bean 的属性 -->
+    <bean id="car" class="com.mmz.spring.beans.Car">
+        <constructor-arg name="brand" value="Auto"></constructor-arg>
+        <constructor-arg name="corp" value="Shanghai"></constructor-arg>
+        <constructor-arg name="price" value="300000"></constructor-arg>
+    </bean>
+
+    <bean id="car2" class="com.mmz.spring.beans.Car">
+        <constructor-arg name="brand" value="BMW"></constructor-arg>
+        <constructor-arg name="corp" value="Shanghai"></constructor-arg>
+        <constructor-arg name="maxSpeed" value="600"></constructor-arg>
+
+    </bean>
+
 </beans>
