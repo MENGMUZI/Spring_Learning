@@ -11,7 +11,9 @@ public class Car {
     private String corp;
     private int maxSpeed;
     private double price;
+    public Car(){
 
+    }
     public Car(String brand, String corp, double price){
         super();
         this.brand = brand;
@@ -33,5 +35,9 @@ public class Car {
                 ", maxSpeed=" + maxSpeed +
                 ", price=" + price +
                 '}';
+    }
+
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
     }
 }

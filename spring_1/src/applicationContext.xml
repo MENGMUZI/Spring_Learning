@@ -29,8 +29,61 @@
     <bean id="car2" class="com.mmz.spring.beans.Car">
         <constructor-arg name="brand" value="BMW"></constructor-arg>
         <constructor-arg name="corp" value="Shanghai"></constructor-arg>
-        <constructor-arg name="maxSpeed" value="600"></constructor-arg>
 
+        <!--constructor-arg name="maxSpeed" value="600"></constructor-arg-->
+        <!-- 字面值：可用字符串表示的值，可以通过 <value> 元素标签或 value 属性进行注入 -->
+        <!--若字面值中包含特殊字符，可以使用 <![CDATA[]]> 把字面值包裹起来-->
+        <constructor-arg name="maxSpeed">
+            <value> 500 </value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="person" class="com.mmz.spring.beans.Person">
+        <property name="name" value="Gumin"></property>
+        <property name="age" value="25"></property>
+        <!--可以通过 <ref> 元素或 ref 属性 为 Bean 的属性或构造器参数指定对 Bean 的引用-->
+        <!-- 方法一
+        <property name="car" ref="car2"></property>
+
+        -->
+
+        <!--方法二
+        <property name="car">
+            <ref bean="car2"></ref>
+        </property>
+        -->
+
+        <!-- 内部bean-->
+        <property name="car">
+            <bean id ="car3" class="com.mmz.spring.beans.Car">
+                <constructor-arg name="brand" value="Benz"></constructor-arg>
+                <constructor-arg name="corp" value="Germany"></constructor-arg>
+                <constructor-arg name="price" value="3000000"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+
+    <bean id="person2" class="com.mmz.spring.beans.Person">
+        <constructor-arg name="name" value="MMZ"></constructor-arg>
+        <constructor-arg name="age" value="24"></constructor-arg>
+        <constructor-arg name="car" ref="car"></constructor-arg>
+    </bean>
+
+    <!--可以使用专用的 <null/> 元素标签为 Bean 的字符串或其它对象类型的属性注入 null 值 -->
+    <bean id="person3" class="com.mmz.spring.beans.Person">
+        <constructor-arg name="name" value="cuihua"></constructor-arg>
+        <constructor-arg name="age" value="14"></constructor-arg>
+        <constructor-arg name="car">
+            <!--
+            <null/>
+            -->
+            <ref bean="car"></ref>
+        </constructor-arg>
+        <!--支持级联属性-->
+        <!-- 注意：需要注意的是car.maxSpeed中car对象必须存在。属性必须先初始化，
+        才可以为级联属性赋值，不然会出异常。和Struts2不一样，但一般不会为级联属性赋值-->
+        <property name="car.maxSpeed" value="500"></property>
     </bean>
 
 </beans>
