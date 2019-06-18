@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="address" class="com.mmz.spring.beans.autowire.Address"
+        p:city="nanjing" p:street="beijingdonglu"></bean>
+
+    <bean id="address2" class="com.mmz.spring.beans.autowire.Address"
+          p:city="benjing" p:street="nanjinglu"></bean>
+
+    <bean id="mycar" class="com.mmz.spring.beans.autowire.Car"
+        p:brand="Audi" p:price="30000000"></bean>
+
+    <bean id="person" class="com.mmz.spring.beans.autowire.Person"
+        p:name="mengmuzi" p:address-ref="address" p:car-ref="mycar"></bean>
+
+
+    <!--可以使用autowire属性指定自动装配的方式
+        byName 根据 bean 的名字和当前 bean 的 setter 风格的属性名进行自动装配，若有匹配，则进行自动装配
+        若没有匹配的，则不装配
+    -->
+    <bean id="person2" class="com.mmz.spring.beans.autowire.Person"
+        p:name="mengmuzi" autowire="byName"></bean>
+
+    <!--如果相同类型有两个bean。出现异常expected single matching bean but found 2: address,address2-->
+    <!--
+    <bean id="person3" class="com.mmz.spring.beans.autowire.Person"
+          p:name="mengmuzi" autowire="byType"></bean>
+    -->
+
+
+</beans>
