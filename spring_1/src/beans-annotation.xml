@@ -13,6 +13,7 @@
         当需要扫描多个包时, 可以使用逗号分隔.
         如果仅希望扫描特定的类而非基包下的所有类，可使用 resource-pattern 属性过滤特定的
     -->
+    <context:component-scan base-package="com.mmz.spring.beans.annotation"></context:component-scan>
 
     <!--
     <context:component-scan base-package="com.mmz.spring.beans.annotation" resource-pattern="service/*.class"
@@ -42,10 +43,11 @@
     </context:component-scan>
     -->
 
-
+    <!--
     <context:component-scan base-package="com.mmz.spring.beans.annotation" use-default-filters="false">
         <context:include-filter type="assignable" expression="com.mmz.spring.beans.annotation.respository.UserRespository"></context:include-filter>
     </context:component-scan>
+    -->
 
 
 

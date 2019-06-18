@@ -21,6 +21,7 @@ public class Main {
 
         UserController userController = (UserController) ctx.getBean("userController");
         System.out.println(userController);
+        userController.execute();
 
         UserService userService = (UserService) ctx.getBean("userService");
         System.out.println(userService);
