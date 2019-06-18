@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--用spel为属性赋一个字面值-->
+    <bean id="address" class="com.mmz.spring.beans.spel.Address">
+        <property name="city" value="#{'beijing'}"></property>
+        <property name="street" value="#{'wudaokou'}"></property>
+    </bean>
+
+    <bean id="car" class="com.mmz.spring.beans.spel.Car">
+        <property name="brand" value="Audi"></property>
+        <property name="price" value="50000000"></property>
+
+        <!--调用静态方法或静态属性：通过 T() 调用一个类的静态方法，它将返回一个 Class Object，然后再调用相应的方法或属性：-->
+        <property name="tyrePerimeter" value="#{T(java.lang.Math).PI*80}"></property>
+    </bean>
+
+    <bean id="person" class="com.mmz.spring.beans.spel.Person">
+        <!--使用spel引用其他的bean-->
+        <property name="car" value="#{car}"></property>
+
+        <!--使用spel来引用其他Bean的属性-->
+        <property name="city" value="#{address.city}"></property>
+
+        <!--在spel中使用运算符-->
+        <property name="info" value="#{car.price > 300000? '金领':'白领'}"></property>
+        <property name="name" value="dafu"></property>
+
+    </bean>
+
+</beans>

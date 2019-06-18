@@ -15,7 +15,4 @@
     <bean id="car2" class="com.mmz.spring.beans.autowire.Car" scope="prototype"
           p:brand="Benz" p:price="30000000"></bean>
 
-
-
-
 </beans>
