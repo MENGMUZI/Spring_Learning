@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="address" class="com.mmz.spring.beans.autowire.Address"
+          p:city="Nanjing" p:street="beijingdonglu"></bean>
+
+    <bean id="address2" class="com.mmz.spring.beans.autowire.Address"
+          p:city="Nanjing" p:street="jinxianghelu"></bean>
+
+    <!--bean 配置的继承：使用bean的parent属性指定继承哪个bean设置-->
+    <bean id="address3" p:street="zhujianglu" parent="address2"></bean>
+
+    <!-- 配置的模板bean里面加入abstract="true"，那么这个bean就不可以被实例化，但是其他bean可以继承。-->
+    <bean id="abstractaddress" class="com.mmz.spring.beans.autowire.Address"
+          p:city="Nanjing" abstract="true"></bean>
+
+    <bean id="childaddress" p:street="zhongshanlu" parent="abstractaddress"></bean>
+
+    <!--在配置erson的时候必须有关联的Car,换言之 person 这个 bean 依赖于这个 Car-->
+    <!--p:car-ref="car" 说明我不仅想在实例化一个bean的时候先初始化 car 这个bean,而且此bean还是我的一部分 -->
+    <!--depends-on="car" 仅说明我在实例化一个bean的时候只是想先初始化 car 这个bean，但是我并不是想要这个car bean成为我的一部分。-->
+    <bean id="car" class="com.mmz.spring.beans.autowire.Car"
+        p:brand="BMW" p:price="200000000"></bean>
+
+    <bean id="person" class="com.mmz.spring.beans.autowire.Person"
+        p:name="mengmuzi" p:address-ref="childaddress" depends-on="car"></bean>
+
+</beans>

@@ -6,6 +6,7 @@
         <fileset id="fileset" name="ApplicationContext" removed="false">
           <file>file://$MODULE_DIR$/src/applicationContext.xml</file>
           <file>file://$MODULE_DIR$/src/beans-autowire.xml</file>
+          <file>file://$MODULE_DIR$/src/beans-relations.xml</file>
         </fileset>
       </configuration>
     </facet>

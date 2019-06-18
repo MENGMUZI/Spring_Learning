@@ -13,6 +13,8 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("beans-autowire.xml");
 
+        ApplicationContext ctx1 = new ClassPathXmlApplicationContext("beans-relations.xml");
+
         Person person = (Person) ctx.getBean("person");
 
         System.out.println(person);
@@ -21,9 +23,29 @@ public class Main {
 
         System.out.println(person);
 
-        person = (Person) ctx.getBean("person3");
+        //person = (Person) ctx.getBean("person3");
+        //System.out.println(person);
 
+        Address address = (Address) ctx1.getBean("address");
+
+        System.out.println(address);
+
+        address = (Address) ctx1.getBean("address2");
+
+        System.out.println(address);
+
+        address = (Address) ctx1.getBean("address3");
+
+        System.out.println(address);
+
+        address = (Address) ctx1.getBean("childaddress");
+
+        System.out.println(address);
+
+        person = (Person) ctx1.getBean("person");
         System.out.println(person);
+
+
     }
 
 }
