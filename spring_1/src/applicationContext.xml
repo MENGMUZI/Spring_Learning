@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:until="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- 配置bean
         class: bean 的 指的是HelloWorld的全路径名称，并且由于是通过反射方式创建Bean,因此Bean中必须有无参的构造器.
@@ -84,6 +85,78 @@
         <!-- 注意：需要注意的是car.maxSpeed中car对象必须存在。属性必须先初始化，
         才可以为级联属性赋值，不然会出异常。和Struts2不一样，但一般不会为级联属性赋值-->
         <property name="car.maxSpeed" value="500"></property>
+
     </bean>
 
+    <!--集合属性-->
+    <!--Spring中可以通过一组内置的 xml 标签(例如: <list>, <set> 或 <map>) 来配置集合属性-->
+    <bean id="person4" class="com.mmz.spring.beans.collections.Person">
+        <property name="name" value="wangcai"></property>
+        <property name="age" value="20"></property>
+        <property name="cars">
+            <!--使用list节点为List类型的属性赋值-->
+            <list>
+                <ref bean="car"></ref>
+                <ref bean="car2"></ref>
+                <bean id="car3" class="com.mmz.spring.beans.Car">
+                    <constructor-arg name="brand" value="Tesla"></constructor-arg>
+                    <constructor-arg name="corp" value="USA"></constructor-arg>
+                    <constructor-arg name="maxSpeed" value="400"></constructor-arg>
+                </bean>
+
+            </list>
+        </property>
+    </bean>
+
+    <!--配置Map属性值-->
+    <!--Java.util.Map 通过 <map> 标签定义, <map> 标签里可以使用多个 <entry> 作为子标签. 每个条目包含一个键和一个值.-->
+    <!--以将 Map 的键和值作为 <entry> 的属性定义: 简单常量使用 key 和 value 来定义; Bean 引用通过 key-ref 和 value-ref 属性定义-->
+    <bean id="person5" class="com.mmz.spring.beans.collections.NewPerson">
+        <property name="name" value="xiaoqiang"></property>
+        <property name="age" value="22"></property>
+        <property name="cars">
+            <map>
+                <entry key="AA" value-ref="car"></entry>
+                <entry key="BB" value-ref="car2"></entry>
+            </map>
+        </property>
+    </bean>
+
+    <!--配置properties属性-->
+    <!--使用 <props> 定义 java.util.Properties, 该标签使用多个 <prop> 作为子标签. 
+        每个 <prop> 标签必须定义 key 属性.
+    -->
+    <bean id="dataSource" class="com.mmz.spring.beans.collections.DataSource">
+        <property name="properties">
+            <props>
+                <prop key="user">root</prop>
+                <prop key="password">58189</prop>
+                <prop key="jdbcUrl">jdbc:mysql:///test</prop>
+                <prop key="driver">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <!--对于集合的配置，如果多个bean都需要这个集合的配置，那么重复书写是个浪费，那么就需要把集合的配置拿出来，单独配置，
+        其他的bean需要使用直接拿出来即可。
+    -->
+    <!--可以使用 util schema 里的集合标签定义独立的集合 Bean. 需要注意的是, 必须在 <beans> 根元素里添加 util schema 定义
+    -->
+
+    <until:list id="cars">
+        <ref bean="car"></ref>
+        <ref bean="car2"></ref>
+    </until:list>
+
+    <bean id="person6" class="com.mmz.spring.beans.collections.Person">
+        <property name="name" value="laifu"></property>
+        <property name="age" value="28"></property>
+        <property name="cars" ref="cars"></property>
+    </bean>
+
+
+    <!--p命名空间的配置方法-->
+    <bean id="person7" class="com.mmz.spring.beans.collections.Person"
+          p:name="zhangwuji" p:age="28"  p:cars-ref="car"></bean>
 </beans>
