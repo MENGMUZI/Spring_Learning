@@ -9,6 +9,10 @@ public class Car {
     private String brand;
     private double price;
 
+    public Car() {
+        System.out.println("car's constructor is ok...");
+    }
+
     public String getBrand() {
         return brand;
     }
