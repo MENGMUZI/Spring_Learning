@@ -1,3 +1,5 @@
+package com.mmz.spring.jdbc;
+
 /**
  * @author : mengmuzi
  * create at:  2019-06-20  01:33
