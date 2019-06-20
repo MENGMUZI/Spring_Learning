@@ -23,8 +23,6 @@ public class SpringTransactionTest {
         bookShopDao = ctx.getBean(BookShopDao.class);
         bookShopService = ctx.getBean(BookShopService.class);
         cashier = ctx.getBean(Cashier.class);
-
-
     }
 
     @Test

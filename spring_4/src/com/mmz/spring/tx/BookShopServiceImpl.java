@@ -2,8 +2,11 @@ package com.mmz.spring.tx;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author : mengmuzi
@@ -28,9 +31,13 @@ public class BookShopServiceImpl implements BookShopService{
      * 5.使用 timeout 指定强制回滚之前事务可以占用的时间
      */
     //添加事务注解
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRES_NEW ,
+            isolation = Isolation.READ_COMMITTED , rollbackFor = Exception.class , readOnly = false , timeout = 3)
     @Override
     public void purchase(String username, int bid) {
+
+        //暂停一会儿线程, 5>3 秒，超出时间，强制回滚
+        //try{ TimeUnit.SECONDS.sleep(5);}catch(Exception e){e.printStackTrace();}
 
         //1. 获取书的单价
         int bprice = bookShopDao.findBookPriceById(bid);
