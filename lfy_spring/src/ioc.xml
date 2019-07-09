@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 
 
@@ -57,5 +58,121 @@
           p:email="gumin@163.com"
           p:gender="女">
     </bean>
+
+
+    <!--为各种不同类型的配置文件赋值：
+        测试赋值null值、
+        引用类型赋值（引用其他的Bean，引用内部的Bean）、
+        集合类型赋值（List/Map/Properties）、
+        util名称空间创建集合类型的bean
+        级联属性赋值
+        -->
+
+    <!--赋值null值-->
+    <bean id="person06" class="com.mmz.Person">
+        <!--lastName = "null"-->
+        <!--
+        <property name="lastName" value="null"></property>
+        -->
+        <!--进行复杂的赋值-->
+        <property name="lastName">
+            <null></null>
+        </property>
+    </bean>
+
+    <!--引用赋值-->
+    <bean id="car01" class="com.mmz.Car" p:price="2000000" p:name="BMW" p:color="red">
+    </bean>
+
+    <bean id="person07" class="com.mmz.Person">
+        <property name="car" ref="car01"></property>
+    </bean>
+
+    <!--引用内部Bean，其中内部Bean的ID没有作用，不能被获取到-->
+    <bean id="person08" class="com.mmz.Person">
+        <property name="car">
+            <bean id="car02" class="com.mmz.Car">
+                <property name="name" value="Auto"></property>
+                <property name="color" value="yellow"></property>
+                <property name="price" value="3500"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="book01" class="com.mmz.Book">
+        <property name="author" value="Hanmnwell"></property>
+        <property name="bookName" value="Oldman and Sea"></property>
+    </bean>
+
+    <!--为list类型赋值,使用list标签-->
+    <bean id="person09" class="com.mmz.Person">
+        <property name="books">
+            <!--list 标签类似于 list = new ArrayList()-->
+            <list>
+                <!--list的标签体中添加每一个元素-->
+                <bean id="book02" class="com.mmz.Book" p:author="Andy" p:bookName="Great Times">
+                </bean>
+
+                <ref bean="book01"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <!--为map类型赋值,使用map标签-->
+    <bean id="person10" class="com.mmz.Person">
+        <property name="maps">
+            <!--map 标签类似于 map = new LinkedHashMap()-->
+            <map>
+                <entry key="k1" value="v1"></entry>
+                <entry key="k2" value="18"></entry>
+                <entry key="k3" value-ref="book01"></entry>
+                <entry key="k4">
+                    <bean id="book03" class="com.mmz.Book" p:author="Cook" p:bookName="Time and Dinner">
+                    </bean>
+                </entry>
+            </map>
+        </property>
+
+    </bean>
+
+    <!--为properties类型赋值,使用props标签-->
+    <bean id="person11" class="com.mmz.Person">
+        <property name="properties">
+            <props>
+                <prop key="username">root</prop>
+                <prop key="password">1234455</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--util名称空间创建集合类型的bean:方便别人引用-->
+    <bean id="person12" class="com.mmz.Person">
+        <property name="maps" ref="myMap"></property>
+    </bean>
+    <util:map id="myMap">
+        <entry key="k1" value="v1"></entry>
+        <entry key="k2" value="18"></entry>
+        <entry key="k3" value-ref="book01"></entry>
+        <entry key="k4">
+            <bean id="book03" class="com.mmz.Book" p:author="Cook" p:bookName="Time and Dinner">
+            </bean>
+        </entry>
+
+    </util:map>
+
+    <!--级联属性赋值:属性的属性,因为是引用所以原来的值也会被修改-->
+    <bean id="person13" class="com.mmz.Person">
+        <!--为Car赋值的时候，改变Car的价格-->
+        <property name="car" ref="car01"></property>
+        <!---->
+        <property name="car.price" value="900000"></property>
+    </bean>
+
+
+
+
+
+
+
 
 </beans>
