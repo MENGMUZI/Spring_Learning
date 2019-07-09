@@ -183,7 +183,8 @@
     -->
 
     <!--实验5：通过继承实现bean配置信息的重用-->
-    <bean id="person14" class="com.mmz.Person">
+    <!-- abstract="true" 这个Bean配置是一个抽象的，不能获取它的实例，只能被别人用来继承-->
+    <bean id="person14" class="com.mmz.Person" abstract="true">
         <property name="lastName" value="翠花"></property>
         <property name="age" value="18"></property>
         <property name="email" value="cuihua@163.com"></property>
