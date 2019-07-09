@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
@@ -48,6 +48,14 @@
         <constructor-arg value="zhangwuji@163.com"></constructor-arg>
         <constructor-arg value="男"></constructor-arg>
 
+    </bean>
+
+    <!--通过p名称空间为bean赋值,名称空间是防止标签重复-->
+    <bean id="person05" class="com.mmz.Person"
+          p:lastName="gumin"
+          p:age="26"
+          p:email="gumin@163.com"
+          p:gender="女">
     </bean>
 
 </beans>

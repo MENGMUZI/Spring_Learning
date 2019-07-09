@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * @author : mengmuzi
  * create at:  2019-07-09  11:14
- * @description: 通过构造器为bean的属性赋值
+ * @description: 通过构造器为bean的属性赋值，采用P名称空间赋值
  */
 public class Test03 {
 
@@ -20,6 +20,10 @@ public class Test03 {
         Person bean04 = (Person) ioc.getBean("person04");
 
         System.out.println(bean04);
+
+        Person bean05 = (Person) ioc.getBean("person05");
+
+        System.out.println(bean05);
 
     }
 }
