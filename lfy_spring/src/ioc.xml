@@ -6,7 +6,7 @@
 
 
 
-    <!--注册一个Person对象，Spring会自动创建这个Person对象-->
+    <!--实验1：注册一个Person对象，Spring会自动创建这个Person对象-->
     <!--
         一个Bean标签可以注册一个组件（对象，类）
         class,写要注册的全类名
@@ -60,7 +60,7 @@
     </bean>
 
 
-    <!--为各种不同类型的配置文件赋值：
+    <!--实验4：为各种不同类型的配置文件赋值：
         测试赋值null值、
         引用类型赋值（引用其他的Bean，引用内部的Bean）、
         集合类型赋值（List/Map/Properties）、
@@ -167,6 +167,42 @@
         <!---->
         <property name="car.price" value="900000"></property>
     </bean>
+
+
+
+
+
+
+
+
+    <!--
+    实验5：通过继承实现bean配置信息的重用
+    实验6：通过abstract属性创建一个模板bean
+    实验7：bean之间的依赖
+    实验8：测试bean的作用域，分别创建单实例和多实例的bean
+    -->
+
+    <!--实验5：通过继承实现bean配置信息的重用-->
+    <bean id="person14" class="com.mmz.Person">
+        <property name="lastName" value="翠花"></property>
+        <property name="age" value="18"></property>
+        <property name="email" value="cuihua@163.com"></property>
+        <property name="gender" value="小仙女"></property>
+
+    </bean>
+
+    <!--parent:指定当前bean的配置信息继承于哪一个-->
+    <bean id="person15" class="com.mmz.Person" parent="person14">
+        <property name="lastName" value="如花"></property>
+    </bean>
+
+
+
+
+
+
+
+
 
 
 
