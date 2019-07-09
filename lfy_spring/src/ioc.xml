@@ -179,11 +179,11 @@
     实验5：通过继承实现bean配置信息的重用
     实验6：通过abstract属性创建一个模板bean
     实验7：bean之间的依赖
-    实验8：测试bean的作用域，分别创建单实例和多实例的bean
+
     -->
 
     <!--实验5：通过继承实现bean配置信息的重用-->
-    <!-- abstract="true" 这个Bean配置是一个抽象的，不能获取它的实例，只能被别人用来继承-->
+    <!--实验6：abstract="true" 这个Bean配置是一个抽象的，不能获取它的实例，只能被别人用来继承-->
     <bean id="person14" class="com.mmz.Person" abstract="true">
         <property name="lastName" value="翠花"></property>
         <property name="age" value="18"></property>
@@ -199,10 +199,20 @@
 
 
 
+    <!--实验7：bean之间的依赖,原本是按照创建的顺序配置Bean的顺序-->
+    <!--可以改变其创建的顺序，depends-on后面跟bean-->
+    <bean id="person" class="com.mmz.Person" depends-on="car"></bean>
+    <bean id="car" class="com.mmz.Car"></bean>
+    <bean id="book" class="com.mmz.Book"></bean>
 
 
 
+    <!--非常重要的实验：
 
+        实验8：测试bean的作用域，分别创建单实例和多实例的bean
+        实验9：配置通过静态工厂创建的bean，实例工厂方法创建的bean，FactoryBean
+
+    -->
 
 
 
