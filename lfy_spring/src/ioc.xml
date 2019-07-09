@@ -20,4 +20,13 @@
 
     </bean>
 
+    <bean id="person02" class="com.mmz.Person">
+        <!--使用property标签为Person对象赋值-->
+        <property name="lastName" value="张三丰"></property>
+        <property name="age" value="180"></property>
+        <property name="email" value="zhangsanfeng@163.com"></property>
+        <property name="gender" value="仙"></property>
+
+    </bean>
+
 </beans>

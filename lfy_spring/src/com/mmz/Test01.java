@@ -6,9 +6,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * @author : mengmuzi
  * create at:  2019-07-09  10:35
- * @description: 测试Person类
+ * @description: 实验01：通过IOC容器创建对象，并为属性赋值
  */
-public class Main {
+public class Test01{
     /**
      * 重要的问题：
      *  1. src 源码包开始的路径，称之为类路径的开始   所有源码包东西都会合并放在类路径里面
