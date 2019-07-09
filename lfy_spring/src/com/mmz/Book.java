@@ -20,6 +20,15 @@ public class Book {
         System.out.println("Book Values Constructor ***** ");
     }
 
+    public void bookInit(){
+        System.out.println("this is book init method!!!!!!!!!!");
+
+    }
+
+    public void bookDestroy(){
+        System.out.println("this is book destroy method!!!!!!!!!!");
+
+    }
     public String getBookName() {
         return bookName;
     }

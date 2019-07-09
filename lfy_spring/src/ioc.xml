@@ -272,6 +272,28 @@
 
 
 
+    <!--
+    实验10：创建带有生命周期方法的bean
+    实验11：测试bean的后置处理器
+    实验12：引用外部属性文件
+    实验13：基于xml的自动装配
+    -->
+
+    <!--实验10：创建带有生命周期方法的bean  生命周期：创建==》销毁
+        单实例 bean： 容器启动的时候就已经创建好了，容器关闭也会销毁创建的bean
+        多实例 bean： 获取时候才创建
+        我们可以为bean自定义一些生命周期的方法；在创建和销毁的时候可以调用指定的方法
+        -->
+    <!--scope="prototype"-->
+    <bean id="book02" class="com.mmz.Book"
+        destroy-method="bookDestroy" init-method="bookInit"></bean>
+
+
+
+
+
+
+
 
 
 
