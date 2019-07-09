@@ -12,12 +12,17 @@ public class Person {
     private String gender;
     private String email;
 
+    Person(){
+        System.out.println("Person constructor...");
+    }
+
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        System.out.println("setLastName is working。。。");
     }
 
     public Integer getAge() {
