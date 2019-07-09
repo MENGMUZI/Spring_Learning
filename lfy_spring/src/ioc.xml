@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
 
@@ -275,7 +276,7 @@
     <!--
     实验10：创建带有生命周期方法的bean
     实验11：测试bean的后置处理器
-    实验12：引用外部属性文件
+    实验12：引用外部属性文件（重要）
     实验13：基于xml的自动装配
     -->
 
@@ -292,6 +293,22 @@
     <!--实验11：测试bean的后置处理器: BeanPostProcessor
     Spring中有个接口，后置处理器，可以在 bean 的初始化前后调用方法-->
     <bean id="myBeanPostProcessor" class="com.mmz.MyBeanPostProcessor"></bean>
+
+
+
+
+    <!--实验12：引用外部属性文件（重要）-->
+    <!--数据库连接池作为单实例是最好的，一个项目就一个连接池，连接池里面管理很多连接。-->
+    <!--通过Spring帮助创建连接池-->
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="jdbcUrl" value="${jdbcurl}"></property>
+        <property name="driverClass" value="${driverclass}"></property>
+    </bean>
+
+
 
 
 
