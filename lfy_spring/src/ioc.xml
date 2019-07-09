@@ -297,9 +297,13 @@
 
 
 
-    <!--实验12：引用外部属性文件（重要）-->
+    <!--实验12：引用外部属性文件（重要）, 依赖context名称空间-->
     <!--数据库连接池作为单实例是最好的，一个项目就一个连接池，连接池里面管理很多连接。-->
     <!--通过Spring帮助创建连接池-->
+    <!-- 引用外部属性文件的固定写法
+        <context:property-placeholder location="classpath:xxxx.db.properties"/>
+        "${xxx}"动态从配置文件中取出对应的值
+    -->
     <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="user" value="${user}"></property>
