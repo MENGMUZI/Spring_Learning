@@ -13,7 +13,16 @@ public class Person {
     private String email;
 
     Person(){
-        System.out.println("Person constructor...");
+        System.out.println("Person Constructor...");
+    }
+
+    public Person(String lastName, Integer age, String gender, String email) {
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.email = email;
+        System.out.println("Person Values Constructor ***** ");
+
     }
 
     public String getLastName() {
@@ -22,7 +31,7 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-        System.out.println("setLastName is working。。。");
+        //System.out.println("setLastName is working。。。");
     }
 
     public Integer getAge() {
