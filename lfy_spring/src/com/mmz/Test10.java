@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @description: 创建带有生命周期方法的bean
  *      单例：生命周期：（容器启动）构造器--》初始化方法--》（容器关闭）销毁方法
  *      多例：生命周期： 获取Bean时构造器--》初始化方法--》 容器关闭的时候不会调用bean的销毁方法
+ *      后置处理器 在初始化方法前后加上 before 和 after 方法
  */
 public class Test10 {
 

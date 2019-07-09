@@ -289,6 +289,11 @@
         destroy-method="bookDestroy" init-method="bookInit"></bean>
 
 
+    <!--实验11：测试bean的后置处理器: BeanPostProcessor
+    Spring中有个接口，后置处理器，可以在 bean 的初始化前后调用方法-->
+    <bean id="myBeanPostProcessor" class="com.mmz.MyBeanPostProcessor"></bean>
+
+
 
 
 
