@@ -105,6 +105,10 @@ public class Person {
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
+                ", car=" + car +
+                ", books=" + books +
+                ", maps=" + maps +
+                ", properties=" + properties +
                 '}';
     }
 }

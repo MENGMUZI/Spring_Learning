@@ -302,7 +302,7 @@
     <!--通过Spring帮助创建连接池-->
     <!-- 引用外部属性文件的固定写法
         <context:property-placeholder location="classpath:xxxx.db.properties"/>
-        "${xxx}"动态从配置文件中取出对应的值
+        "${xxx}"动态从配置文件中取出对应的值,注意引号中不能有空格
     -->
     <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -310,6 +310,43 @@
         <property name="password" value="${password}"></property>
         <property name="jdbcUrl" value="${jdbcurl}"></property>
         <property name="driverClass" value="${driverclass}"></property>
+    </bean>
+
+
+
+    <!--实验13：基于xml的自动装配(为自定义类型自动赋值)-->
+
+    <bean id="car03" class="com.mmz.Car" p:price="2000000" p:name="BMW" p:color="red">
+    </bean>
+
+
+    <bean id="person16" class="com.mmz.Person" autowire="constructor">
+        <!--这是手动赋值
+        <property name="car" ref="car03"></property>
+        -->
+    </bean>
+
+
+    <!--实验14：「SpEL测试」（看看）
+        在SpEL中使用字面量，
+        引用其他bean，
+        引用其他bean的某个属性值，
+        调用非静态方法，
+        调用静态方法，
+        使用运算符
+    -->
+
+    <bean id="person17" class="com.mmz.Person">
+        <!--字面量：${}; spring中是#{}-->
+        <property name="age" value="#{12*5}"></property>
+        <!--引用其他bean的某个属性值-->
+        <property name="lastName" value="#{book01.author}"></property>
+        <!--引用其他bean-->
+        <property name="car" value="#{car01}"></property>
+        <!--调用静态方法-->
+        <property name="email" value="#{T(java.util.UUID).randomUUID().toString()}"></property>
+
+
     </bean>
 
 
