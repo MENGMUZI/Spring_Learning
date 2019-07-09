@@ -222,6 +222,57 @@
     <bean id="bookPrototype" class="com.mmz.Book" scope="prototype"></bean>
 
 
+    <!--实验9：配置通过静态工厂创建的bean，实例工厂方法创建的bean，FactoryBean-->
+    <!--默认框架利用反射new出来bean的实例-->
+    <!--工厂模式：不需要知道细节，工厂帮我们创建，有一个专门帮我们创建对象的类就是工厂-->
+    <!--静态工厂：工厂本身不需要创建对象,通过静态方法调用，对象 = 工厂类.工厂方法名()-->
+    <!--实例工厂：工厂本身需要创建对象，工厂类 工厂对象 = new 工厂类() -->
+
+
+    <!--1.静态工厂（不需要创建工厂本身）
+        class:指定静态工厂的全类名
+        factory-method:指定工厂方法
+        constructor-arg:传参
+     -->
+
+    <bean id="airPlane01" class="com.mmz.factory.AirPlaneStaticFactory"
+          factory-method="getAirPlane">
+        <!--<constructor-arg>传参-->
+        <constructor-arg name="caption" value="mmz"></constructor-arg>
+
+    </bean>
+
+
+    <!--2.实例工厂（需要创建工厂本身）-->
+    <bean id="airPlaneInstanceFactory" class="com.mmz.factory.AirPlaneInstanceFactory">
+
+    </bean>
+
+    <!--factory-bean：指定当前对象创建使用的工厂对象
+            1.配置实例工厂对象
+            2.配置我们要创建的AirPlane使用哪个工厂实例
+                  1）factory-bean 指定使用哪个工厂实例
+                  2）factory-method 指定哪个工厂方法
+    -->
+    <bean id="airPlane02" class="com.mmz.AirPlane"
+        factory-bean="airPlaneInstanceFactory"
+        factory-method="getAirPlane">
+        <constructor-arg name="caption" value="mmz"></constructor-arg>
+
+    </bean>
+
+
+    <!--(重要)3.FactoryBean(是Spring规定的一个接口)，只要是这个接口实现类，Spring都认为是一个工厂
+            1.ioc容器启动的时候不会创建实例
+            2.FactoryBean:获取时候才创建对象
+            注意：这里跟isSingleton()这个是单多实例没有任何关系
+    -->
+    <bean id="myFactoryBeanImple" class="com.mmz.factory.MyFactoryBeanImple"></bean>
+
+
+
+
+
 
 
 
