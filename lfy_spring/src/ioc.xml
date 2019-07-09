@@ -213,6 +213,16 @@
         实验9：配置通过静态工厂创建的bean，实例工厂方法创建的bean，FactoryBean
 
     -->
+    <!--实验8：测试bean的作用域，分别创建单实例和多实例的bean
+            bean的作用域：指定bean是否为单实例，默认是单实例
+            scope="prototype" 是多实例 容器启动之前不会创建对象，每次获取的时候才会创建新的实例
+            scope="singleton" 是单实例（默认）在容器启动之前就已经创建好了对象
+            -->
+
+    <bean id="bookPrototype" class="com.mmz.Book" scope="prototype"></bean>
+
+
+
 
 
 
