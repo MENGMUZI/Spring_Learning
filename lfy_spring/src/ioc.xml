@@ -350,6 +350,32 @@
     </bean>
 
 
+    <!--实验15：通过注解分别创建Dao,Service,Controller
+        实验16：使用context：include-filter指定扫描包时要包含的类
+        实验17：使用context：exclude-filter指定扫描包时不包含的类
+    -->
+
+    <!--实验15：通过注解分别创建Dao,Service,Controller.
+        通过给bean上添加某些注解，可以快速将bean加入IOC容器中
+        Spring四个注解
+        @Controller:控制器（servlet）
+        @Service:业务逻辑
+        @Repository:给数据库层，持久化层，dao层
+        @Component:给不属于以上几层的组件添加这个注解
+
+
+        使用注解将组件快速加入到容器中需要几步：
+        1.给要添加的组件上标4个注解中的任何一个
+        2.告诉spring自动扫描添加注解的组件，依赖context名称空间
+        3.导入AOP包
+        context:component-scan:自动组件扫描
+        base-package：
+        -->
+    <context:component-scan base-package="com.mmz"></context:component-scan>
+
+
+
+
 
 
 

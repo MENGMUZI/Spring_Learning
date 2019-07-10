@@ -5,6 +5,7 @@
       <configuration>
         <fileset id="fileset" name="Ioc" removed="false">
           <file>file://$MODULE_DIR$/src/com/mmz/ioc.xml</file>
+          <file>file://$MODULE_DIR$/src/ioc.xml</file>
         </fileset>
       </configuration>
     </facet>
