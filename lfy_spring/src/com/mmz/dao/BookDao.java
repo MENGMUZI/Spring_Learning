@@ -1,5 +1,6 @@
 package com.mmz.dao;
 
+import com.mmz.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -9,14 +10,12 @@ import org.springframework.stereotype.Repository;
  * @description:
  */
 
-
 @Repository
-public class BookDao {
+public class BookDao extends BaseDao<Book> {
 
     @Autowired
-    public void saveBook(){
-
+    @Override
+    public void save() {
         System.out.println("save a book.........");
-
     }
 }

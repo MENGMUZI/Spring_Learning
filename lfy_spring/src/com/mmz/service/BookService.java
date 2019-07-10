@@ -1,5 +1,7 @@
 package com.mmz.service;
 
+import com.mmz.Book;
+import com.mmz.dao.BaseDao;
 import com.mmz.dao.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,15 +14,17 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class BookService {
+public class BookService extends BaseService<Book> {
 
+    /*
     @Qualifier("bookDao")
     @Autowired
     public BookDao bookDao;
 
     public void save(){
         System.out.println("bookService is using bookDao........");
-        bookDao.saveBook();
+        bookDao.save();
     }
+    */
 
 }
