@@ -398,6 +398,18 @@
     <!--DII(依赖注入)(重要！！！)-->
     <!--实验18：使用@Autowired注解实现根据类型实现自动装配-->
     <context:component-scan base-package="com.mmz"></context:component-scan>
+    <!--@Autowired原理：
+            1.按照类型去容器中找到对应的组件：bookService = ioc.getBean(BookService.class)
+               若找到一个直接赋值；没有找到报异；找到多个->按照成员变量变量名ID继续匹配->若没有匹配上（按照变量名匹配），
+               可以使用@Qualifier：指定一个名为ID，让spring别使用变量名作为ID
+    -->
+
+    <!--@Autowired, @Resource, @Inject 都是自动装配
+        @Autowired是spring自己的注解，强大
+        @Resource是j2ee，Java自己的标准，扩展性强，若使用其他容器框架@Resource还是可以使用
+        -->
+
+
 
 
 

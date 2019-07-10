@@ -2,6 +2,7 @@ package com.mmz.service;
 
 import com.mmz.dao.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookService {
 
+    @Qualifier("bookDao")
     @Autowired
     public BookDao bookDao;
 
