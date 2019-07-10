@@ -10,7 +10,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  * 使用注解加入到容器中的组件，和使用配置加入到容器中的组件行为都是默认一样的
  *  1.组件的ID，默认是组件的类名首字母小写
+ *     @Service("xxxxxx")
  *  2.组件的作用域，默认就是单例
+ *     @Scope(value="prototype")
+ *
+ *
  */
 public class Test15 {
 
