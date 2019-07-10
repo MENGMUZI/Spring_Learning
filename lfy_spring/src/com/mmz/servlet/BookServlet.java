@@ -1,5 +1,7 @@
 package com.mmz.servlet;
 
+import com.mmz.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -10,5 +12,15 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class BookServlet {
+
+    @Autowired
+    public BookService bookService;
+
+    public void doGet(){
+
+        bookService.save();
+    }
+
+
 
 }
