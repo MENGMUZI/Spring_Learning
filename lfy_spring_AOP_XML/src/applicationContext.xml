@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/c"
+       xmlns:conntext="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+
+    <!--基于注解的AOP步骤：
+        1.将目标类和切面类都加入到IOC容器中。@Component
+        2.告诉Spring哪个是切面类。@Aspect
+        3.在切面类中使用五个通知注解来配置切面中的这些通知方法何时执行
+        4.开启基于注解的AOP功能
+    <conntext:component-scan base-package="com.mmz"></conntext:component-scan>
+
+    开启基于注解的AOP功能，AOP名称空间
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+    -->
+
+    <!--基于配置的AOP-->
+    <bean id="myMathCalculator" class="com.mmz.impl.MyMathCalculator"></bean>
+    <bean id="logUtils" class="com.mmz.utils.LogUtils"></bean>
+    <bean id="validateAspect" class="com.mmz.utils.ValidateAspect"></bean>
+
+    <aop:config>
+        <aop:pointcut id="mypoint" expression="execution(public int com.mmz.impl.MyMathCalculator.*(*, *))"></aop:pointcut>
+
+        <aop:aspect ref="logUtils">
+            <aop:before method="logStart" pointcut-ref="mypoint"></aop:before>
+            <aop:after-returning method="logReturn" pointcut-ref="mypoint"></aop:after-returning>
+            <aop:after-throwing method="logException" pointcut-ref="mypoint"></aop:after-throwing>
+            <aop:after method="logEnd" pointcut-ref="mypoint"></aop:after>
+        </aop:aspect>
+
+        <aop:aspect ref="validateAspect"></aop:aspect>
+    </aop:config>
+
+
+
+</beans>
