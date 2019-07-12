@@ -33,6 +33,9 @@ public class Test02 {
 
         bean.add(1,2);
 
+
+        System.out.println("==========================");
+
         bean.div(2,1);
     }
 

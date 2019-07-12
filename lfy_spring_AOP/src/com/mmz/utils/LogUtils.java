@@ -4,6 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -24,6 +25,7 @@ import java.util.Arrays;
 
 @Component
 @Aspect
+@Order(1)//用order改变切面的顺序，数组越小优先级越高
 public class LogUtils {
     /**
      * 切入点表达式
@@ -58,6 +60,8 @@ public class LogUtils {
      *  四合一
      *  环绕通知优先于普通通知执行，执行顺序：
      *
+     * 细节十：多切面运行顺序
+     *
      */
 
     @Around("myPointCut()")
@@ -90,19 +94,19 @@ public class LogUtils {
         //获取到方法签名
         Signature signature = joinPoint.getSignature();
         String name = signature.getName();
-        System.out.println( name + " 方法开始执行，用的参数列表是：" + Arrays.asList(args));
+        System.out.println( "LogUtils " + name + " 方法开始执行，用的参数列表是：" + Arrays.asList(args));
     }
     @AfterReturning(value = "myPointCut()",returning = "result")
     public static void logReturn(JoinPoint joinPoint, Object result){
-        System.out.println(joinPoint.getSignature().getName() + " 方法执行完成，执行的结果是：" + result);
+        System.out.println("LogUtils " + joinPoint.getSignature().getName() + " 方法执行完成，执行的结果是：" + result);
     }
     @AfterThrowing(value = "myPointCut()", throwing = "e")
     public static void logException(JoinPoint joinPoint, Exception e){
-        System.out.println(joinPoint.getSignature().getName() + " 方法执行出现异常，异常的结果是：" + e);
+        System.out.println("LogUtils " + joinPoint.getSignature().getName() + " 方法执行出现异常，异常的结果是：" + e);
     }
     @After("myPointCut()")
     public static void logEnd(JoinPoint joinPoint){
-        System.out.println(joinPoint.getSignature().getName() + " 方法最终执行完成 ");
+        System.out.println("LogUtils " + joinPoint.getSignature().getName() + " 方法最终执行完成 ");
     }
 
 }
