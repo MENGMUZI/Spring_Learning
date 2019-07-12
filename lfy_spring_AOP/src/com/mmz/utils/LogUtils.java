@@ -1,5 +1,7 @@
 package com.mmz.utils;
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
@@ -32,22 +34,44 @@ public class LogUtils {
     //权限位置
 
 
+    /**
+     * 细节四：在通知方法运行的时候，拿到目标方法的详细信息
+     *  1）只需要为通知方法的参数列表上写一个参数：JoinPoint
+     *  JoinPoint joinPoint 封装了当前目标方法的详细信息
+     *
+     *
+     * 细节五：throwing,returning来指定哪个参数用来接收异常，返回值
+     *
+     *
+     * 细节六：Spring对通知方法的约束
+     * 唯一要求是方法的参数列表不能乱写，通知方法是Spring利用反射调用的，每次方法调用得确定这个方法的参数表的值
+     * 参数表上的每一个参数，Spring都要知道是什么
+     *
+     *
+     */
+
+
 
     @Before("execution(public int com.mmz.impl.MyMathCalculator.*(int, int))")
-    public static void logStart(){
-        System.out.println( " 方法开始执行，用的参数列表是：");
+    public static void logStart(JoinPoint joinPoint){
+        //获取到目标方法运行使用的参数
+        Object[] args = joinPoint.getArgs();
+        //获取到方法签名
+        Signature signature = joinPoint.getSignature();
+        String name = signature.getName();
+        System.out.println( name + " 方法开始执行，用的参数列表是：" + Arrays.asList(args));
     }
-    @AfterReturning("execution(public int com.mmz.impl.MyMathCalculator.*(int, int)))")
-    public static void logReturn(){
-        System.out.println(" 方法执行完成，执行的结果是：" );
+    @AfterReturning(value = "execution(public int com.mmz.impl.MyMathCalculator.*(int, int)))",returning = "result")
+    public static void logReturn(JoinPoint joinPoint, Object result){
+        System.out.println(joinPoint.getSignature().getName() + " 方法执行完成，执行的结果是：" + result);
     }
-    @AfterThrowing("execution(public int com.mmz.impl.MyMathCalculator.*(int, int))")
-    public static void logException(){
-        System.out.println(" 方法执行出现异常，异常的结果是：");
+    @AfterThrowing(value = "execution(public int com.mmz.impl.MyMathCalculator.*(int, int))", throwing = "e")
+    public static void logException(JoinPoint joinPoint, Exception e){
+        System.out.println(joinPoint.getSignature().getName() + " 方法执行出现异常，异常的结果是：" + e);
     }
     @After("execution(public int com.mmz.impl.MyMathCalculator.*(int, int))")
-    public static void logEnd(){
-        System.out.println(" 方法最终执行完成 ");
+    public static void logEnd(JoinPoint joinPoint){
+        System.out.println(joinPoint.getSignature().getName() + " 方法最终执行完成 ");
     }
 
 }

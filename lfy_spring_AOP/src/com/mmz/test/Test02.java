@@ -32,6 +32,8 @@ public class Test02 {
         System.out.println(bean2.getClass());
 
         bean.add(1,2);
+
+        bean.div(2,1);
     }
 
 }
