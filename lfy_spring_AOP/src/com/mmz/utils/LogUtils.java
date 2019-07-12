@@ -24,15 +24,20 @@ import java.util.Arrays;
 @Component
 @Aspect
 public class LogUtils {
-
-    //切入点表达式
-    //execution(访问权限符，返回值类型，方法签名)
-    //可以加入通配符 * ，匹配一个多个字符   execution(public int com.mmz.impl.MyMathCalculator.*(int, int))
-    //可以匹配任意一个参数，第一个是int类型，第二个任意类型 execution(public int com.mmz.impl.MyMathCalculator.*(int, *))
-    //可以匹配多个参数，任意类型参数 execution(public int com.mmz.impl.MyMathCalculator.*(..))
-    //可以匹配多层路径 execution(public int com.mmz..MyMathCalculator.*(..))
-    //权限位置
-
+    /**
+     * 切入点表达式
+     * execution(访问权限符，返回值类型，方法签名)
+     * 可以加入通配符 * ，匹配一个多个字符   execution(public int com.mmz.impl.MyMathCalculator.*(int, int))
+     * 可以匹配任意一个参数，第一个是int类型，第二个任意类型 execution(public int com.mmz.impl.MyMathCalculator.*(int, *))
+     * 可以匹配多个参数，任意类型参数 execution(public int com.mmz.impl.MyMathCalculator.*(..))
+     * 可以匹配多层路径 execution(public int com.mmz..MyMathCalculator.*(..))
+     * 权限位置
+     *
+     * 抽取可重用的切入点表达式：
+     * 1.随便声明一个没有实现的返回void的空方法
+     * 2.给方法上标注@Pointcut的注解
+     *
+     */
 
     /**
      * 细节四：在通知方法运行的时候，拿到目标方法的详细信息
@@ -49,10 +54,11 @@ public class LogUtils {
      *
      *
      */
+    @Pointcut("execution(public int com.mmz.impl.MyMathCalculator.*(int, int)))")
+    public void myPointCut(){}
 
 
-
-    @Before("execution(public int com.mmz.impl.MyMathCalculator.*(int, int))")
+    @Before("myPointCut()")
     public static void logStart(JoinPoint joinPoint){
         //获取到目标方法运行使用的参数
         Object[] args = joinPoint.getArgs();
@@ -61,15 +67,15 @@ public class LogUtils {
         String name = signature.getName();
         System.out.println( name + " 方法开始执行，用的参数列表是：" + Arrays.asList(args));
     }
-    @AfterReturning(value = "execution(public int com.mmz.impl.MyMathCalculator.*(int, int)))",returning = "result")
+    @AfterReturning(value = "myPointCut()",returning = "result")
     public static void logReturn(JoinPoint joinPoint, Object result){
         System.out.println(joinPoint.getSignature().getName() + " 方法执行完成，执行的结果是：" + result);
     }
-    @AfterThrowing(value = "execution(public int com.mmz.impl.MyMathCalculator.*(int, int))", throwing = "e")
+    @AfterThrowing(value = "myPointCut()", throwing = "e")
     public static void logException(JoinPoint joinPoint, Exception e){
         System.out.println(joinPoint.getSignature().getName() + " 方法执行出现异常，异常的结果是：" + e);
     }
-    @After("execution(public int com.mmz.impl.MyMathCalculator.*(int, int))")
+    @After("myPointCut()")
     public static void logEnd(JoinPoint joinPoint){
         System.out.println(joinPoint.getSignature().getName() + " 方法最终执行完成 ");
     }
