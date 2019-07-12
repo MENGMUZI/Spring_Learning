@@ -20,8 +20,8 @@ public class Test03 {
 
         bean.add(1,2);
 
-        System.out.println(bean);
-        System.out.println(bean.getClass());
+        System.out.println(bean);// com.mmz.impl.MyMathCalculator2@4fb0f2b9
+        System.out.println(bean.getClass());// class com.mmz.impl.MyMathCalculator2
 
     }
 
