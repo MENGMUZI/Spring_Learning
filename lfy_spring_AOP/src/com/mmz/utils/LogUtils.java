@@ -1,6 +1,7 @@
 package com.mmz.utils;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,7 @@ public class LogUtils {
      * 可以匹配多层路径 execution(public int com.mmz..MyMathCalculator.*(..))
      * 权限位置
      *
+     * 细节七：
      * 抽取可重用的切入点表达式：
      * 1.随便声明一个没有实现的返回void的空方法
      * 2.给方法上标注@Pointcut的注解
@@ -52,8 +54,31 @@ public class LogUtils {
      * 唯一要求是方法的参数列表不能乱写，通知方法是Spring利用反射调用的，每次方法调用得确定这个方法的参数表的值
      * 参数表上的每一个参数，Spring都要知道是什么
      *
+     * 细节八：环绕通知 @Around: ==》相对于动态代理
+     *  四合一
+     *  环绕通知优先于普通通知执行，执行顺序：
      *
      */
+
+    @Around("myPointCut()")
+    public Object myAround(ProceedingJoinPoint pjp) throws Throwable {
+        Object[] args = pjp.getArgs();
+        String name = pjp.getSignature().getName();
+        //利用反射调用目标方法,这句话其实就相当于method.invoke(object,args)
+        Object proceed = null;
+        try{
+            System.out.println("环绕前置通知 " + name + " 方法开始");
+            proceed = pjp.proceed(args);
+            System.out.println("环绕返回通知 " + name + " 方法返回值是：" + proceed);
+        }catch(Exception e){
+            System.out.println("环绕异常通知 " + name + " 方法出现异常，异常是：" + e);
+        }finally{
+            System.out.println("环绕后置通知 " + name + " 方法结束");
+        }
+        return proceed;
+
+    }
+
     @Pointcut("execution(public int com.mmz.impl.MyMathCalculator.*(int, int)))")
     public void myPointCut(){}
 
